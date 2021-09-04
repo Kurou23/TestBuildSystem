@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad12bd8f8845884f9655f4f036d28c1, type: 3}
+  m_Name: Door01
+  m_EditorClassIdentifier: 
+  ColorId: Door01
+  MatsColor:
+  - {fileID: 2100000, guid: b737ad506b5e8934ebe4303e4e4bee2a, type: 2}
+  - {fileID: 2100000, guid: b737ad506b5e8934ebe4303e4e4bee2a, type: 2}
+  - {fileID: 2100000, guid: b737ad506b5e8934ebe4303e4e4bee2a, type: 2}
+  - {fileID: 2100000, guid: 33528be64ec4183499d4196a40856615, type: 2}
