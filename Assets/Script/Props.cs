@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class Props : MonoBehaviour
 {
+    public string NameComponent;
     public enum TypeComponent { Floor, Wall, Door, Furniture}
     public TypeComponent typeComponent;
+
+    public string ColorId;
 
     public MeshRenderer[] RenderModels;
 
     public ColorSet[] colorSet;
 
-    public void SetColor(string colorId)
+    public void SetColor()
     {
         int id = 0;
         for (int i = 0; i < colorSet.Length; i++)
         {
-            if (colorSet[i].ColorId == colorId)
+            if (colorSet[i].ColorId == ColorId)
             {
                 id = i;
             }
@@ -26,7 +29,5 @@ public class Props : MonoBehaviour
         {
             RenderModels[i].material = colorSet[id].MatsColor[i];
         }
-
-
     }
 }

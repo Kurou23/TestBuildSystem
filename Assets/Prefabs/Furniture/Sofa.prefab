@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 3380769068334225813}
   - component: {fileID: 6138491470319995337}
   - component: {fileID: 4384351165883122560}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Sofa
   m_TagString: Furniture
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8364064000209513045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.406, y: 0.478, z: 0}
+  m_LocalPosition: {x: -0.406, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 779834255138617741}
@@ -236,7 +236,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b80c2dab8f3512429039adc44fcec46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameComponent: Sofa
   typeComponent: 3
+  ColorId: 
   RenderModels:
   - {fileID: 4051074045870683002}
   - {fileID: 3349315399896378273}

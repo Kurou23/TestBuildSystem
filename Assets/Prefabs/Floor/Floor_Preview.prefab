@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7461346028935895416}
   - component: {fileID: 2575879974054297023}
   - component: {fileID: -2209225669358554847}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Floor_Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,10 +128,12 @@ MonoBehaviour:
   prefab: {fileID: 6392214151413916918, guid: 89009ad662f755e4fa9c71dacd0a8251, type: 3}
   GoodMat: {fileID: 2100000, guid: 1e00dfc9a79392b4fbbe1cf4d8fc3087, type: 2}
   BadMat: {fileID: 2100000, guid: 09d0c523b26bcc14db7951ffc2aff494, type: 2}
+  IsSnapped: 0
+  IsTrueRotation: 0
+  NameComponent: Floor
   typeComponent: 0
   TagSnapId:
   - Floor_SP
-  collideList: []
   IsVertical: 0
   meshRendDoor: []
   meshRendFurniture: []

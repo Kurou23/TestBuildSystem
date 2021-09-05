@@ -23,6 +23,7 @@ public class BuildSystem : MonoBehaviour
     public bool CanBuild = true;
     public bool isBuilding = false;
     private bool isPause = false;
+    private bool IsEditMode;
 
     private void Awake()
     {
@@ -50,7 +51,7 @@ public class BuildSystem : MonoBehaviour
             }
 
             // Cancel Buid
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.G) || Input.GetMouseButtonDown(1))
             {
                 CancelBuild();
             }
@@ -86,16 +87,35 @@ public class BuildSystem : MonoBehaviour
         }
         else
         {
-
-
             if (Input.GetMouseButtonDown(0))
             {
                 DoCastRay();
             }
 
-            if (selectGameObject != null && Input.GetKeyDown(KeyCode.Delete))
+            if (selectGameObject != null)
             {
-                DestroyBuild();
+                if (Input.GetKeyDown(KeyCode.Delete))
+                {
+                    DestroyBuild();
+                    UIHander.Instance.HideEditPanel();
+                    UIHander.Instance.ShowBuildPanel();
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    IsEditMode = true;
+                    selectGameObject.SetActive(false);
+                    Props prop = selectGameObject.GetComponent<Props>();
+
+                    BuildManager.instance.CreateComponent(prop.NameComponent);
+                    BuildManager.instance.SelectColor(prop.ColorId);
+
+                    //DestroyBuild();
+                    UIHander.Instance.HideEditPanel();
+                    UIHander.Instance.HideBuildPanel();
+
+                }
+
             }
         }
     }
@@ -106,26 +126,43 @@ public class BuildSystem : MonoBehaviour
         {
             DeSelectColor();
         }
+        isBuilding = true;
         previewGameObject = Instantiate(prefab, Vector3.zero, Quaternion.identity);
         previewScript = previewGameObject.GetComponent<Preview>();
-        isBuilding = true;
-        DoBuildRay();
+
+        UIHander.Instance.HideBuildPanel();
     }
 
     public void CancelBuild()
     {
+        if (IsEditMode)
+        {
+            selectGameObject.SetActive(true);
+            IsEditMode = false;
+        }
+
+        isBuilding = false;
         Destroy(previewGameObject);
         previewGameObject = null;
         previewScript = null;
-        isBuilding = false;
+
+        UIHander.Instance.ShowBuildPanel();
     }
 
     public void StopBuild()
     {
+        if (IsEditMode)
+        {
+            DestroyBuild();
+            IsEditMode = false;
+        }
+
         previewScript.Place();
         previewGameObject = null;
         previewScript = null;
         isBuilding = false;
+
+        UIHander.Instance.ShowBuildPanel();
     }
 
     public void PauseBuild(bool value)
@@ -144,6 +181,9 @@ public class BuildSystem : MonoBehaviour
             prop.RenderModels[i].material = SelectMat;
         }
 
+        UIHander.Instance.ShowEditPanel();
+        UIHander.Instance.SelectEditLayout(prop.NameComponent);
+
         Debug.Log("hit building");
     }
 
@@ -155,7 +195,24 @@ public class BuildSystem : MonoBehaviour
         {
             prop.RenderModels[i].material = tempMats[i];
         }
+    }
 
+    public void ChangeColor(string colorId)
+    {
+        Props prop = selectGameObject.GetComponent<Props>();
+        prop.ColorId = colorId;
+        prop.SetColor();
+        if (prop.typeComponent.ToString() == "Floor")
+        {
+            GameManager.instance.UpdateObjet(selectGameObject.transform.position, prop.NameComponent, prop.typeComponent.ToString(), prop.transform.GetChild(0).rotation.eulerAngles, prop.ColorId);
+        }
+        else
+        {
+            GameManager.instance.UpdateObjet(selectGameObject.transform.position, prop.NameComponent, prop.typeComponent.ToString(), prop.transform.rotation.eulerAngles, prop.ColorId);
+        }
+
+        selectGameObject = null;
+        UIHander.Instance.ShowBuildPanel();
     }
 
     public void DestroyBuild()
@@ -171,9 +228,12 @@ public class BuildSystem : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, blueLayer))
         {
-            float y = hit.point.y + (previewGameObject.transform.localScale.y / 2);
-            Vector3 pos = new Vector3(Mathf.FloorToInt(hit.point.x), y, Mathf.FloorToInt(hit.point.z));
-            previewGameObject.transform.position = pos;
+            if (previewGameObject != null)
+            {
+                float y = hit.point.y + (previewGameObject.transform.localScale.y / 2);
+                Vector3 pos = new Vector3(Mathf.FloorToInt(hit.point.x), y, Mathf.FloorToInt(hit.point.z));
+                previewGameObject.transform.position = pos;
+            }
         }
     }
 
@@ -184,27 +244,27 @@ public class BuildSystem : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 100f, buildingLayer))
         {
-            if (hit.collider.tag == "Floor" || hit.collider.tag == "Wall" || hit.collider.tag == "Door" || hit.collider.tag == "Furniture")
+            if (!CameraController.Instance.IsMouseOverUI())
             {
-                if (selectGameObject != null)
+                if (hit.collider.tag == "Floor" || hit.collider.tag == "Wall" || hit.collider.tag == "Door" || hit.collider.tag == "Furniture")
                 {
-                    DeSelectColor();
+                    if (selectGameObject != null)
+                    {
+                        DeSelectColor();
+                    }
+                    selectGameObject = hit.collider.gameObject;
+                    SelectColor();
                 }
-                selectGameObject = hit.collider.gameObject;
-                SelectColor();
+                else if (hit.collider.tag == "Ground")
+                {
+                    if (selectGameObject != null)
+                    {
+                        DeSelectColor();
+                        UIHander.Instance.ShowBuildPanel();
+                    }
+                }
             }
-            else if (hit.collider.tag == "Ground")
-            {
-                if (selectGameObject != null)
-                {
-                    DeSelectColor();
-                }
 
-                if (!CameraController.Instance.IsMouseOverUI())
-                {
-                    CameraController.Instance.IsCameraMove = true;
-                }
-            }
         }
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 604673028946786818}
   - component: {fileID: 604673028946786817}
   - component: {fileID: 604673028946786816}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: DoorPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1683420034}
   - component: {fileID: 1683420033}
   - component: {fileID: 3129834581773312255}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Door Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,10 +162,12 @@ MonoBehaviour:
   prefab: {fileID: 604673030312260717, guid: aebbac60d619a0e4485a999bbdb44ac7, type: 3}
   GoodMat: {fileID: 2100000, guid: 1e00dfc9a79392b4fbbe1cf4d8fc3087, type: 2}
   BadMat: {fileID: 2100000, guid: 09d0c523b26bcc14db7951ffc2aff494, type: 2}
+  IsSnapped: 0
+  IsTrueRotation: 0
+  NameComponent: Door
   typeComponent: 2
   TagSnapId:
   - Door_SP
-  collideList: []
   IsVertical: 0
   meshRendDoor:
   - {fileID: 604673028946786816}
@@ -173,6 +175,7 @@ MonoBehaviour:
   - {fileID: 604673030398332931}
   - {fileID: 604673030537076133}
   meshRendFurniture: []
+  collideFurniture: []
 --- !u!1 &604673030398332988
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +187,7 @@ GameObject:
   - component: {fileID: 604673030398332989}
   - component: {fileID: 604673030398332928}
   - component: {fileID: 604673030398332931}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: DoorPanel2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +268,7 @@ GameObject:
   - component: {fileID: 604673030514030853}
   - component: {fileID: 604673030514030856}
   - component: {fileID: 604673030514030859}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: DoorPanel1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,7 +349,7 @@ GameObject:
   - component: {fileID: 604673030537076135}
   - component: {fileID: 604673030537076138}
   - component: {fileID: 604673030537076133}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

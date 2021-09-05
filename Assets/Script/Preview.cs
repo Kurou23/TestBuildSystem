@@ -15,16 +15,20 @@ public class Preview : MonoBehaviour
     [SerializeField]
     private bool IsTrueRotation = false;
 
+    public string NameComponent;
     public enum TypeComponent { Floor, Wall, Door, Furniture }
     public TypeComponent typeComponent;
 
     public List<string> TagSnapId = new List<string>();
+    [SerializeField]
     private List<GameObject> collideList = new List<GameObject>();
 
     [Header("Wall & Option")]
     public bool IsVertical = false;
     public MeshRenderer[] meshRendDoor;
-    private GameObject SelectedWall;
+    [SerializeField]
+    private GameObject SelectWall;
+    public List<GameObject> collideWall= new List<GameObject>();
 
     [Header("Furniture Option")]
     public MeshRenderer[] meshRendFurniture;
@@ -52,32 +56,36 @@ public class Preview : MonoBehaviour
         {
             GameObject floor = Instantiate(prefab, transform.position, Quaternion.identity, BuildManager.instance.FloorParent.transform);
             floor.transform.GetChild(0).rotation = transform.rotation;
-
-            floor.GetComponent<Props>().SetColor(BuildManager.instance.ColorId);
+            floor.GetComponent<Props>().ColorId = BuildManager.instance.ColorId;
+            floor.GetComponent<Props>().SetColor();
             GameManager.instance.SaveObject(transform.position, BuildManager.instance.NameComponent, typeComponent.ToString(), new Vector3(0f, floor.transform.GetChild(0).rotation.eulerAngles.y,0f), BuildManager.instance.ColorId);
         }
         else if (typeComponent == TypeComponent.Wall)
         {
             GameObject wall = Instantiate(prefab, transform.position, transform.rotation, BuildManager.instance.WallParent.transform);
 
-            wall.GetComponent<Props>().SetColor(BuildManager.instance.ColorId);
+            wall.GetComponent<Props>().ColorId = BuildManager.instance.ColorId;
+            wall.GetComponent<Props>().SetColor();
             GameManager.instance.SaveObject(transform.position, BuildManager.instance.NameComponent, typeComponent.ToString(), new Vector3(0f, wall.transform.rotation.eulerAngles.y, 0f), BuildManager.instance.ColorId);
         }
         else if (typeComponent == TypeComponent.Door)
         {
             GameObject door = Instantiate(prefab, transform.position, transform.rotation, BuildManager.instance.DoorParent.transform);
 
-            door.GetComponent<Props>().SetColor(BuildManager.instance.ColorId);
+            door.GetComponent<Props>().ColorId = BuildManager.instance.ColorId;
+            door.GetComponent<Props>().SetColor();
             GameManager.instance.SaveObject(transform.position, BuildManager.instance.NameComponent, typeComponent.ToString(), new Vector3(0f, door.transform.rotation.eulerAngles.y, 0f), BuildManager.instance.ColorId);
 
-            Destroy(SelectedWall);
-            GameManager.instance.DeleteObject(SelectedWall.transform.position, SelectedWall.GetComponent<Props>().typeComponent.ToString());
+            GameManager.instance.DeleteObject(SelectWall.transform.position, SelectWall.GetComponent<Props>().typeComponent.ToString());
+            Destroy(SelectWall);
+            
         }
         else if (typeComponent == TypeComponent.Furniture)
         {
             GameObject furniture = Instantiate(prefab, transform.position, transform.rotation, BuildManager.instance.FurnitureParent.transform);
 
-            furniture.GetComponent<Props>().SetColor(BuildManager.instance.ColorId);
+            furniture.GetComponent<Props>().ColorId = BuildManager.instance.ColorId;
+            furniture.GetComponent<Props>().SetColor();
             GameManager.instance.SaveObject(transform.position, BuildManager.instance.NameComponent, typeComponent.ToString(), new Vector3(0f, furniture.transform.rotation.eulerAngles.y, 0f), BuildManager.instance.ColorId);
         }
 
@@ -163,15 +171,15 @@ public class Preview : MonoBehaviour
 
     private void DoorRotChecker()
     {
-        if (SelectedWall != null)
+        if (SelectWall != null)
         {
             bool vertival = false;
-            if (SelectedWall.transform.rotation.eulerAngles.y == 0 || SelectedWall.transform.rotation.eulerAngles.y == 180)
+            if (SelectWall.transform.rotation.eulerAngles.y == 0 || SelectWall.transform.rotation.eulerAngles.y == 180)
             {
                 vertival = true;
             }
 
-            if (SelectedWall.transform.rotation.eulerAngles.y == 90 || SelectedWall.transform.rotation.eulerAngles.y == 270)
+            if (SelectWall.transform.rotation.eulerAngles.y == 90 || SelectWall.transform.rotation.eulerAngles.y == 270)
             {
                 vertival = false;
             }
@@ -229,15 +237,21 @@ public class Preview : MonoBehaviour
 
     private void CheckCollideFurniture() {
         int err = 0;
+        bool canBuild = false;
         for (int i = 0; i < collideFurniture.Count; i++)
         {
             if (collideFurniture[i].tag == "Door" || collideFurniture[i].tag == "Wall")
             {
                 err++;
             }
+
+            if (collideFurniture[i].tag == "Floor")
+            {
+                canBuild = true;
+            }
         }
 
-        if (err == 0)
+        if (err == 0 && canBuild)
         {
             IsSnapped = true;
         }
@@ -289,8 +303,15 @@ public class Preview : MonoBehaviour
         // Hide Wall when placing Door
         if (typeComponent == TypeComponent.Door && other.tag == "Wall")
         {
+            if (!collideWall.Contains(other.gameObject))
+                collideWall.Add(other.gameObject);
+
             other.GetComponent<MeshRenderer>().enabled = false;
-            SelectedWall = other.gameObject;
+
+            if (collideWall.Count == 1)
+            {
+                SelectWall = collideWall[0];
+            }    
         }
 
         // Add colide list for furniture
@@ -330,8 +351,15 @@ public class Preview : MonoBehaviour
         // Unhide Wall When Placing Door 
         if (typeComponent == TypeComponent.Door && other.tag == "Wall")
         {
+            if (collideWall.Contains(other.gameObject))
+                collideWall.Remove(other.gameObject);
+
             other.GetComponent<MeshRenderer>().enabled = true;
-            SelectedWall = null;
+
+            if (collideWall.Count == 0)
+            {
+                SelectWall = null;
+            }
         }
 
         // Remove colide list for furniture

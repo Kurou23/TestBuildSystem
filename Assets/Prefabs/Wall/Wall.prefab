@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4733991949450320071}
   - component: {fileID: 6300021606213411548}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapDoor
   m_TagString: Door_SP
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 9076177195772983214}
   - component: {fileID: 9076177195772983213}
   - component: {fileID: 2690271162005388910}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b80c2dab8f3512429039adc44fcec46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameComponent: Wall
   typeComponent: 1
+  ColorId: 
   RenderModels:
   - {fileID: 9076177195772983214}
   colorSet:

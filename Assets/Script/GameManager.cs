@@ -14,14 +14,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        else {
+        else
+        {
             instance = this;
         }
 
         LoadBuilding();
     }
 
-    public void LoadBuilding() {
+    public void LoadBuilding()
+    {
         for (int i = 0; i < GameData.ObjectDataList.Count; i++)
         {
             if (GameData.ObjectDataList[i].TypeComponent == "Floor")
@@ -29,21 +31,24 @@ public class GameManager : MonoBehaviour
                 GameObject floor = Instantiate(BuildManager.instance.Floor, BuildManager.instance.FloorParent.transform);
                 floor.transform.position = GameData.ObjectDataList[i].Position;
                 floor.transform.GetChild(0).Rotate(GameData.ObjectDataList[i].Rotation);
-                floor.GetComponent<Props>().SetColor(GameData.ObjectDataList[i].ColorId);
+                floor.GetComponent<Props>().ColorId = GameData.ObjectDataList[i].ColorId;
+                floor.GetComponent<Props>().SetColor();
             }
             else if (GameData.ObjectDataList[i].TypeComponent == "Wall")
             {
                 GameObject wall = Instantiate(BuildManager.instance.Wall, BuildManager.instance.WallParent.transform);
                 wall.transform.position = GameData.ObjectDataList[i].Position;
                 wall.transform.Rotate(GameData.ObjectDataList[i].Rotation);
-                wall.GetComponent<Props>().SetColor(GameData.ObjectDataList[i].ColorId);
+                wall.GetComponent<Props>().ColorId = GameData.ObjectDataList[i].ColorId;
+                wall.GetComponent<Props>().SetColor();
             }
             else if (GameData.ObjectDataList[i].TypeComponent == "Door")
             {
                 GameObject door = Instantiate(BuildManager.instance.Door, BuildManager.instance.DoorParent.transform);
                 door.transform.position = GameData.ObjectDataList[i].Position;
                 door.transform.Rotate(GameData.ObjectDataList[i].Rotation);
-                door.GetComponent<Props>().SetColor(GameData.ObjectDataList[i].ColorId);
+                door.GetComponent<Props>().ColorId = GameData.ObjectDataList[i].ColorId;
+                door.GetComponent<Props>().SetColor();
             }
             else if (GameData.ObjectDataList[i].TypeComponent == "Furniture")
             {
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (BuildManager.instance.Furniture[j].GetComponent<Props>().name == GameData.ObjectDataList[i].NameComponent)
                     {
-                      
+
                         obj = BuildManager.instance.Furniture[j];
                     }
                 }
@@ -62,9 +67,10 @@ public class GameManager : MonoBehaviour
                     GameObject furniture = Instantiate(obj, BuildManager.instance.FurnitureParent.transform);
                     furniture.transform.position = GameData.ObjectDataList[i].Position;
                     furniture.transform.Rotate(GameData.ObjectDataList[i].Rotation);
-                    furniture.GetComponent<Props>().SetColor(GameData.ObjectDataList[i].ColorId);
+                    furniture.GetComponent<Props>().ColorId = GameData.ObjectDataList[i].ColorId;
+                    furniture.GetComponent<Props>().SetColor();
                 }
-               
+
             }
         }
     }
@@ -82,7 +88,8 @@ public class GameManager : MonoBehaviour
         writeFile();
     }
 
-    public void DeleteObject(Vector3 pos, string type) {
+    public void DeleteObject(Vector3 pos, string type)
+    {
         Data data = new Data();
         for (int i = 0; i < GameData.ObjectDataList.Count; i++)
         {
@@ -95,6 +102,25 @@ public class GameManager : MonoBehaviour
         if (data.NameComponent != "")
         {
             GameData.ObjectDataList.Remove(data);
+            writeFile();
+        }
+    }
+
+    public void UpdateObjet(Vector3 pos, string name, string type, Vector3 rot, string colorId)
+    {
+        Data data = new Data();
+        for (int i = 0; i < GameData.ObjectDataList.Count; i++)
+        {
+            if (GameData.ObjectDataList[i].TypeComponent == type && GameData.ObjectDataList[i].Position == pos)
+            {
+                data = GameData.ObjectDataList[i];
+            }
+        }
+
+        if (data.NameComponent != "")
+        {
+            data.Rotation = rot;
+            data.ColorId = colorId;
             writeFile();
         }
     }
@@ -120,7 +146,6 @@ public class GameManager : MonoBehaviour
     string saveFile;
 
     // Create a GameData field.
-
     public SaveData GameData = new SaveData();
 
     void Awake()

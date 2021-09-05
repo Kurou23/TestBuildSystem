@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
                 mouseFirstPos = Input.mousePosition;
                 cameratPos = transform.position;
                 mouseDiff = Vector3.zero;
+                IsCameraMove = true;
             }
 
             if (IsCameraMove)
@@ -48,6 +49,9 @@ public class CameraController : MonoBehaviour
             {
                 IsCameraMove = false;
             }
+        }
+        else {
+            IsCameraMove = false;
         }
     }
 

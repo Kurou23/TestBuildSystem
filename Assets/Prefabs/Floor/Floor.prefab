@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 66490365918861292}
   - component: {fileID: 66490365918861293}
   - component: {fileID: 2077624091644262538}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint Wall
   m_TagString: Wall_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1903040713846837368}
   - component: {fileID: 1903040713846837369}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint (1)
   m_TagString: Floor_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -112,7 +112,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3122642111730974669}
   - component: {fileID: 3122642111730974668}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint (3)
   m_TagString: Floor_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 3916802665712001753}
   - component: {fileID: 3916802665712001752}
   - component: {fileID: 1342176491977891135}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint Wall (2)
   m_TagString: Wall_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4091144141778855496}
   - component: {fileID: 4091144141778855497}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint (2)
   m_TagString: Floor_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 6392214151413916922}
   - component: {fileID: 5283130017686663466}
   - component: {fileID: 7554445714516886211}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Floor
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -375,7 +375,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b80c2dab8f3512429039adc44fcec46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NameComponent: Floor
   typeComponent: 0
+  ColorId: 
   RenderModels:
   - {fileID: 1147665540821816391}
   colorSet:
@@ -443,7 +445,7 @@ GameObject:
   - component: {fileID: 7619427963028361419}
   - component: {fileID: 7619427963028361418}
   - component: {fileID: 4235873317050881236}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint Wall (3)
   m_TagString: Wall_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -500,7 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8369665394616003041}
   - component: {fileID: 8369665394616003040}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint
   m_TagString: Floor_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -545,7 +547,7 @@ GameObject:
   - component: {fileID: 8676512638880237590}
   - component: {fileID: 8676512638880237591}
   - component: {fileID: 2479305473665738261}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: SnapPoint Wall (1)
   m_TagString: Wall_SP
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}

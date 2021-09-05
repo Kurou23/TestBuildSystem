@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4526252241151594598}
   - component: {fileID: 4526252241151594599}
   - component: {fileID: 4526252241151594596}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4526252241151594594}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.034, z: 0}
+  m_LocalPosition: {x: 0, y: -0.291, z: 0}
   m_LocalScale: {x: 0.62609255, y: 0.17351559, z: 1.1065192}
   m_Children: []
   m_Father: {fileID: 4526252241676807408}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4526252241676807409}
   - component: {fileID: 4526252241676807422}
   - component: {fileID: 4526252241676807423}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Sofa Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,9 @@ MonoBehaviour:
   prefab: {fileID: 8364064000209513045, guid: 52e3fd56db1356248824b36ddd53f041, type: 3}
   GoodMat: {fileID: 2100000, guid: 1e00dfc9a79392b4fbbe1cf4d8fc3087, type: 2}
   BadMat: {fileID: 2100000, guid: 09d0c523b26bcc14db7951ffc2aff494, type: 2}
+  IsSnapped: 0
+  IsTrueRotation: 0
+  NameComponent: Sofa
   typeComponent: 3
   TagSnapId:
   - Floor
@@ -154,6 +157,7 @@ MonoBehaviour:
   meshRendFurniture:
   - {fileID: 4526252241151594599}
   - {fileID: 4452191032082116735}
+  collideFurniture: []
 --- !u!65 &4526252241676807422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -165,8 +169,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.35, z: 1.15}
-  m_Center: {x: 0, y: -0.025, z: 0}
+  m_Size: {x: 0.65, y: 0.6, z: 1.15}
+  m_Center: {x: 0, y: -0.29, z: 0}
 --- !u!54 &4526252241676807423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -195,7 +199,7 @@ GameObject:
   - component: {fileID: 7875575588512384187}
   - component: {fileID: 4452191032082116735}
   - component: {fileID: 2001496907904090122}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8766757559942959853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.225, y: 0.086, z: 0}
+  m_LocalPosition: {x: -0.225, y: -0.174, z: 0}
   m_LocalScale: {x: 0.16580741, y: 0.39815986, z: 1.1065192}
   m_Children: []
   m_Father: {fileID: 4526252241676807408}
